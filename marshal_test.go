@@ -70,19 +70,6 @@ var testsEnmarshal = []testsEnmarshal_t{
 			{"1.3.6.1.2.1.1.3.0", 0x93, 0xa0},
 		},
 	},
-	{
-		Version2c,
-		"***REMOVED***",
-		175873997,
-		cisco_getbulk_request_bytes,
-		"cisco_getbulk_request",
-		0x67,
-		0x1d,
-		0xa1,
-		[]testsEnmarshalVarbindPosition{
-			{"1.3.6.1.2.1.31.1.1.1.6.1", 0x20, 0x2d},
-		},
-	},
 }
 
 // helpers for Enmarshal tests
@@ -589,7 +576,7 @@ func cisco_getnext_response_bytes() []byte {
 
 func cisco_getnext_request_bytes() []byte {
 	return []byte {
-		0x07, 0x7e,
+		0x30, 0x7e,
 		0x02, 0x01, 0x01, 0x04, 0x06, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0xa1,
 		0x71, 0x02, 0x04, 0x5b, 0x1d, 0xb6, 0xee, 0x02, 0x01, 0x00, 0x02, 0x01,
 		0x00, 0x30, 0x63, 0x30, 0x15, 0x06, 0x11, 0x2b, 0x06, 0x01, 0x02, 0x01,
@@ -603,7 +590,21 @@ func cisco_getnext_request_bytes() []byte {
 		0x01, 0x01, 0x01, 0x00, 0x05, 0x00,
 	}
 }
+/* cisco getbulk bytes corresponds to this snmpbulkget command:
 
+$ snmpbulkget -v2c -cpublic  127.0.0.1:161 1.3.6.1.2.1.1.9.1.3.52
+iso.3.6.1.2.1.1.9.1.4.1 = Timeticks: (21) 0:00:00.21
+iso.3.6.1.2.1.1.9.1.4.2 = Timeticks: (21) 0:00:00.21
+iso.3.6.1.2.1.1.9.1.4.3 = Timeticks: (21) 0:00:00.21
+iso.3.6.1.2.1.1.9.1.4.4 = Timeticks: (21) 0:00:00.21
+iso.3.6.1.2.1.1.9.1.4.5 = Timeticks: (21) 0:00:00.21
+iso.3.6.1.2.1.1.9.1.4.6 = Timeticks: (23) 0:00:00.23
+iso.3.6.1.2.1.1.9.1.4.7 = Timeticks: (23) 0:00:00.23
+iso.3.6.1.2.1.1.9.1.4.8 = Timeticks: (23) 0:00:00.23
+iso.3.6.1.2.1.2.1.0 = INTEGER: 3
+iso.3.6.1.2.1.2.2.1.1.1 = INTEGER: 1
+
+*/
 func cisco_getbulk_request_bytes() []byte {
 	return []byte{
 		0x30, 0x2b,
